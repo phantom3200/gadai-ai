@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/gadai-ai/static/css/main.509fae35.css",
-    "main.js": "/gadai-ai/static/js/main.eceba7c0.js",
+    "main.js": "/gadai-ai/static/js/main.659f7ce8.js",
     "static/js/453.7574fad3.chunk.js": "/gadai-ai/static/js/453.7574fad3.chunk.js",
     "static/media/demo_screen_3.jpg": "/gadai-ai/static/media/demo_screen_3.1759bcab2630b31df14f.jpg",
     "static/media/demo_screen_2.jpg": "/gadai-ai/static/media/demo_screen_2.8d95b263ec1f72c2355c.jpg",
@@ -13,11 +13,11 @@
     "static/media/top-left-corner.svg": "/gadai-ai/static/media/top-left-corner.dbfa638bc8806f1511b4.svg",
     "static/media/top-right-corner.svg": "/gadai-ai/static/media/top-right-corner.e28c4221f3094161176a.svg",
     "main.509fae35.css.map": "/gadai-ai/static/css/main.509fae35.css.map",
-    "main.eceba7c0.js.map": "/gadai-ai/static/js/main.eceba7c0.js.map",
+    "main.659f7ce8.js.map": "/gadai-ai/static/js/main.659f7ce8.js.map",
     "453.7574fad3.chunk.js.map": "/gadai-ai/static/js/453.7574fad3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.509fae35.css",
-    "static/js/main.eceba7c0.js"
+    "static/js/main.659f7ce8.js"
   ]
 }
