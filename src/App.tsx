@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { CropScreen, MainScreen, StoriesScreen, Cards } from './components';
+import { useRecoilValue } from 'recoil';
+import { currentMode } from './app.atoms';
+import { Modes } from './app.const';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const mode = useRecoilValue(currentMode);
+    const isStartScreen = mode === Modes.MainScreen;
+    const isCropScreen = mode === Modes.CropScreen;
+    const isStoriesScreen = mode === Modes.Stories;
+    const isCardsScreen = mode === Modes.Cards;
+
+    return (
+        <div className={'content-wrapper'}>
+            <div className={'container'}>
+                {isStartScreen && <MainScreen />}
+                {isCropScreen && <CropScreen />}
+                {isStoriesScreen && <StoriesScreen />}
+                {isCardsScreen && <Cards />}
+            </div>
+        </div>
+    );
 }
 
 export default App;
