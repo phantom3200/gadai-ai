@@ -1,6 +1,6 @@
 import { CSSProperties, FC, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { croppedImage, croppedImageUrl, currentMode, imageUrl, isDataLoading } from '../app.atoms';
+import { croppedImage, croppedImageUrl, currentMode, imageUrl, isPredictionLoading } from '../app.atoms';
 import ReactCrop, { type Crop, PixelCrop } from 'react-image-crop';
 import { FormattedImg } from '../app.types';
 import { initialCrop, Modes } from '../app.const';
@@ -11,7 +11,7 @@ const CropScreen: FC = () => {
     const [croppedImg, setCroppedImg] = useRecoilState(croppedImage);
     const [croppedImgUrl, setCroppedImgUrl] = useRecoilState(croppedImageUrl);
     const [mode, setMode] = useRecoilState(currentMode);
-    const [isLoading, setIsLoading] = useRecoilState(isDataLoading);
+    const [isLoading, setIsLoading] = useRecoilState(isPredictionLoading);
     const url = useRecoilValue(imageUrl);
     const [crop, setCrop] = useState<Crop>(initialCrop);
     const [completedCrop, setCompletedCrop] = useState<PixelCrop>();

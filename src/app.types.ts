@@ -1,3 +1,5 @@
+import {ReactNode} from "react";
+
 export type IconsProps = {
     className?: string;
 };
@@ -24,6 +26,7 @@ export type StoriesProps = {
     defaultStoryDuration: number;
     millisecondsToPauseStory: number;
     onStart: () => void;
+    isLoading: boolean;
 };
 
 export type AnimateProps = {
@@ -39,3 +42,38 @@ export type TypewriterProps = {
     text: string;
     delay: number;
 };
+
+export type User = {
+    isAdmin?: boolean;
+    isOnboardingCompleted?: boolean;
+    id?: string | null;
+    name?: string | null;
+    surname?: string | null;
+    username?: string | null;
+    balance?: number;
+};
+
+export type GetUserDataProps = {
+    setUser: (user: User | null) => void;
+};
+
+export type CreateUserProps = {
+    id: string;
+    setIsLoading: (value: boolean) => void;
+};
+
+export type OpenInvoiceLinkProps = {
+    setIsPaywallModalOpened: (value: boolean) => void
+}
+
+export type PaywallItem = {
+    id: number;
+    title: string;
+    price: number;
+    benefit?: number;
+}
+
+export type ModalProps = {
+    children: ReactNode;
+    onClose: () => void;
+}

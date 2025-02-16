@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
+import './firebase';
+import { tg } from './telegramData';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const tg = window.Telegram.WebApp;
 tg.expand();
 tg.disableVerticalSwipes();
+console.log(tg);
 
 root.render(
     <React.StrictMode>

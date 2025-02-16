@@ -9,14 +9,14 @@ import {
 import clsx from 'clsx';
 import card from '../images/card.png';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { isDataLoading, prediction } from '../app.atoms';
+import { isPredictionLoading, prediction } from '../app.atoms';
 import { cards } from '../app.const';
 // @ts-ignore
 import styles from '../App.scss';
 import Typewriter from './Typewriter';
 
 const Cards: FC = () => {
-    const [isLoading, setIsLoading] = useRecoilState(isDataLoading);
+    const [isLoading, setIsLoading] = useRecoilState(isPredictionLoading);
     const currentPrediction = useRecoilValue(prediction);
     const [activeCardId, setActiveCardId] = useState<number | null>(null);
     const [isCardReadyToFlip, setIsCardReadyToFlip] = useState(false);

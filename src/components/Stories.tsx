@@ -7,6 +7,7 @@ const Stories: FC<StoriesProps> = ({
     defaultStoryDuration,
     millisecondsToPauseStory,
     onStart,
+    isLoading,
 }) => {
     const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
     const [isSameStoryPlaying, setIsSameStoryPlaying] = useState(true); // для повторного воспроизведения той же сторис
@@ -197,9 +198,9 @@ const Stories: FC<StoriesProps> = ({
                     </Fragment>
                 );
             })}
-            <div className={startButtonClassName} onClick={onStart}>
+            <button className={startButtonClassName} onClick={onStart} disabled={isLoading}>
                 Начать
-            </div>
+            </button>
         </div>
     );
 };

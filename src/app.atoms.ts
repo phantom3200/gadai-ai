@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil';
-import { Modes } from './app.const';
+import {Modes, paywallItems} from './app.const';
+import {PaywallItem, User} from './app.types';
 
 export const currentMode = atom<Modes>({
     key: 'currentMode',
@@ -33,7 +34,27 @@ export const prediction = atom<string>({
     default: '',
 });
 
-export const isDataLoading = atom<boolean>({
-    key: 'isDataLoading',
+export const isPredictionLoading = atom<boolean>({
+    key: 'isPredictionLoading',
     default: true,
 });
+
+export const isStartButtonLoading = atom<boolean>({
+    key: 'isStartButtonLoading',
+    default: false,
+});
+
+export const currentUser = atom<User | null>({
+    key: 'currentUser',
+    default: null,
+});
+
+export const paywallRadioState = atom<PaywallItem>({
+    key: 'paywallRadioState',
+    default: paywallItems[1],
+});
+
+export const isPaywallOpened = atom<boolean>({
+    key: 'isPaywallOpened',
+    default: true
+})
