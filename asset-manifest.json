@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/gadai-ai/static/css/main.509fae35.css",
-    "main.js": "/gadai-ai/static/js/main.659f7ce8.js",
+    "main.css": "/gadai-ai/static/css/main.e213465f.css",
+    "main.js": "/gadai-ai/static/js/main.cfa57a28.js",
     "static/js/453.7574fad3.chunk.js": "/gadai-ai/static/js/453.7574fad3.chunk.js",
     "static/media/demo_screen_3.jpg": "/gadai-ai/static/media/demo_screen_3.1759bcab2630b31df14f.jpg",
     "static/media/demo_screen_2.jpg": "/gadai-ai/static/media/demo_screen_2.8d95b263ec1f72c2355c.jpg",
     "static/media/demo_screen_1.jpg": "/gadai-ai/static/media/demo_screen_1.5781699847f58101c688.jpg",
     "static/media/card.png": "/gadai-ai/static/media/card.e8ec377aed116f6f6938.png",
+    "static/media/tg-star-icon.png": "/gadai-ai/static/media/tg-star-icon.691068e21319bcd08f73.png",
     "index.html": "/gadai-ai/index.html",
     "static/media/bottom-left-corner.svg": "/gadai-ai/static/media/bottom-left-corner.be190b0b64e75bad661d.svg",
     "static/media/bottom-right-corner.svg": "/gadai-ai/static/media/bottom-right-corner.93f642bb71e47c983521.svg",
     "static/media/top-left-corner.svg": "/gadai-ai/static/media/top-left-corner.dbfa638bc8806f1511b4.svg",
     "static/media/top-right-corner.svg": "/gadai-ai/static/media/top-right-corner.e28c4221f3094161176a.svg",
-    "main.509fae35.css.map": "/gadai-ai/static/css/main.509fae35.css.map",
-    "main.659f7ce8.js.map": "/gadai-ai/static/js/main.659f7ce8.js.map",
+    "main.e213465f.css.map": "/gadai-ai/static/css/main.e213465f.css.map",
+    "main.cfa57a28.js.map": "/gadai-ai/static/js/main.cfa57a28.js.map",
     "453.7574fad3.chunk.js.map": "/gadai-ai/static/js/453.7574fad3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.509fae35.css",
-    "static/js/main.659f7ce8.js"
+    "static/css/main.e213465f.css",
+    "static/js/main.cfa57a28.js"
   ]
 }
