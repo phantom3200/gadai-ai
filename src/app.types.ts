@@ -50,7 +50,7 @@ export type User = {
     name?: string | null;
     surname?: string | null;
     username?: string | null;
-    balance?: number;
+    balance: number;
 };
 
 export type GetUserDataProps = {
@@ -61,10 +61,6 @@ export type CreateUserProps = {
     id: string;
     setIsLoading: (value: boolean) => void;
 };
-
-export type OpenInvoiceLinkProps = {
-    setIsPaywallModalOpened: (value: boolean) => void
-}
 
 export type PaywallItem = {
     id: number;
@@ -77,3 +73,7 @@ export type ModalProps = {
     children: ReactNode;
     onClose: () => void;
 }
+
+export type EventData = { url: string; status: "paid" | "cancelled" | "failed" | "pending" }
+
+export type InvoiceClosedCallback = (eventData: EventData) => void;

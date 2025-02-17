@@ -2,11 +2,10 @@ import { blobToBase64 } from './app.utils';
 import {
     CreateUserProps,
     GetUserDataProps,
-    OpenInvoiceLinkProps,
-    RequestDataByImageProps,
+    RequestDataByImageProps, User,
 } from './app.types';
-import { openInvoice, setTgLoadingReady } from './telegramData';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { setTgLoadingReady, tg} from './telegramData';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { firestore } from './firebase';
 import { defaultUser, userRef } from './app.const';
 import axios from 'axios';
@@ -50,7 +49,7 @@ export const getUserData = async ({ setUser }: GetUserDataProps) => {
         await getDoc(userRef)
             .then((docSnap) => {
                 if (docSnap.exists()) {
-                    const userData = docSnap.data();
+                    const userData = docSnap.data() as User;
                     setUser(userData);
                     setTgLoadingReady();
                 }
@@ -85,25 +84,4 @@ export const getInvoiceLink = async () => {
     );
     const invoiceLink = response.data;
     return invoiceLink;
-};
-
-export const openInvoiceLink = async ({ setIsPaywallModalOpened }: OpenInvoiceLinkProps) => {
-    const invoiceLinkResult = await getInvoiceLink();
-    if (invoiceLinkResult.success) {
-        const invoiceLink = invoiceLinkResult.data;
-        // @ts-ignore
-        openInvoice(invoiceLink, async (url, status) => {
-            console.log(url);
-            console.log(status);
-            if (status === 'paid') {
-                console.log('paid')
-                if (userRef) {
-                    await updateDoc(userRef, {balance: 1}).then(() => {
-                        console.log('balance updated')
-                        setIsPaywallModalOpened(false);
-                    });
-                }
-            }
-        });
-    }
 };

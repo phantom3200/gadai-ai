@@ -1,24 +1,52 @@
-import {FC, useEffect} from 'react';
-import {useRecoilState, useRecoilValue} from 'recoil';
-import {currentUser, isPaywallOpened, paywallRadioState} from '../app.atoms';
+import { FC, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { currentUser, isPaywallOpened, paywallRadioState } from '../app.atoms';
 import tgStarIcon from '../images/tg-star-icon.png';
-import {paywallItems, userRef} from '../app.const';
-import { PaywallItem } from '../app.types';
-import { openInvoiceLink } from '../app.services';
-import {updateDoc} from "firebase/firestore";
+import { paywallItems, userRef } from '../app.const';
+import { EventData, PaywallItem } from '../app.types';
+import {getInvoiceLink} from '../app.services';
+import { updateDoc } from 'firebase/firestore';
+import { tg } from '../telegramData';
 
 const Paywall: FC = () => {
     const [paywallState, setPaywallState] = useRecoilState(paywallRadioState);
     const [isPaywallModalOpened, setIsPaywallModalOpened] = useRecoilState(isPaywallOpened);
-    const user = useRecoilValue(currentUser)
+    const user = useRecoilValue(currentUser);
     // TODO: сделать анимацию для чекбокса и кастомную иконку внутри
+
+    const handleInvoiceClosed = async (e: EventData) => {
+        const { status } = e;
+        if (status === 'paid' && user) {
+            const newBalance = user.balance + 1
+            if (userRef) {
+                await updateDoc(userRef, { balance: newBalance }).then(() => {
+                    setIsPaywallModalOpened(false);
+                });
+            }
+        }
+    };
+
+    useEffect(() => {
+        tg.onEvent('invoiceClosed', handleInvoiceClosed);
+        return () => {
+            tg.offEvent('invoiceClosed', handleInvoiceClosed);
+        };
+    }, []);
 
     const handleRadioChange = (newValue: PaywallItem) => () => {
         setPaywallState(newValue);
     };
 
-    const handlePay = async () => {
-        void openInvoiceLink({ setIsPaywallModalOpened });
+    const openInvoiceLink = async () => {
+        const invoiceLinkResult = await getInvoiceLink();
+        if (invoiceLinkResult.success) {
+            const invoiceLink = invoiceLinkResult.data;
+            tg.openInvoice(invoiceLink, () => null);
+        }
+    };
+
+    const handlePay = () => {
+        void openInvoiceLink();
     };
 
     return (
