@@ -11,6 +11,8 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 tg.expand();
 tg.disableVerticalSwipes();
+// @ts-ignore
+tg.lockOrientation();
 console.log(tg);
 
 root.render(
