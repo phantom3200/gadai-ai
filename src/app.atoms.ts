@@ -4,7 +4,7 @@ import {PaywallItem, User} from './app.types';
 
 export const currentMode = atom<Modes>({
     key: 'currentMode',
-    default: Modes.Stories,
+    default: Modes.MainScreen,
 });
 export const image = atom<File | null>({
     key: 'image',
@@ -34,13 +34,13 @@ export const prediction = atom<string>({
     default: '',
 });
 
-export const isPredictionLoading = atom<boolean>({
-    key: 'isPredictionLoading',
+export const isPredictionDataLoading = atom<boolean>({
+    key: 'isPredictionDataLoading',
     default: true,
 });
 
-export const isStartButtonLoading = atom<boolean>({
-    key: 'isStartButtonLoading',
+export const isUserDataLoading = atom<boolean>({
+    key: 'isUserDataLoading',
     default: false,
 });
 
@@ -56,5 +56,15 @@ export const paywallRadioState = atom<PaywallItem>({
 
 export const isPaywallOpened = atom<boolean>({
     key: 'isPaywallOpened',
+    default: false
+})
+
+export const isPredictionAlertOpened = atom<boolean>({
+    key: 'isPredictionAlertOpened',
     default: true
+})
+
+export const isTypewriterCompleted = atom<boolean>({
+    key: 'isTypewriterCompleted',
+    default: false
 })

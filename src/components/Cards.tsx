@@ -1,23 +1,29 @@
-import {
-    createRef,
-    CSSProperties,
-    FC,
-    useEffect,
-    useMemo,
-    useState,
-} from 'react';
+import { createRef, CSSProperties, FC, useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import card from '../images/card.png';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { isPredictionLoading, prediction } from '../app.atoms';
-import { cards } from '../app.const';
+import {
+    currentMode, currentUser,
+    isPredictionAlertOpened,
+    isPredictionDataLoading,
+    isTypewriterCompleted, isUserDataLoading,
+    prediction,
+} from '../app.atoms';
+import { cards, Modes } from '../app.const';
 // @ts-ignore
 import styles from '../App.scss';
 import Typewriter from './Typewriter';
+import {getUserData} from "../app.services";
 
 const Cards: FC = () => {
-    const [isLoading, setIsLoading] = useRecoilState(isPredictionLoading);
+    const [isLoading, setIsLoading] = useRecoilState(isPredictionDataLoading);
+    const [mode, setMode] = useRecoilState(currentMode);
+    const [predictionAlertOpened, setPredictionAlertOpened] =
+        useRecoilState(isPredictionAlertOpened);
+    const [user, setUser] = useRecoilState(currentUser);
+    const [isUserLoading, setIsUserLoading] = useRecoilState(isUserDataLoading);
     const currentPrediction = useRecoilValue(prediction);
+    const isTypingCompleted = useRecoilValue(isTypewriterCompleted);
     const [activeCardId, setActiveCardId] = useState<number | null>(null);
     const [isCardReadyToFlip, setIsCardReadyToFlip] = useState(false);
     const [isCardsAnimationFinished, setIsCardsAnimationFinished] = useState(false);
@@ -31,13 +37,10 @@ const Cards: FC = () => {
     const cardFlippedDuration = Number(styles.flipCardDuration);
     const cardFlippingAnimation = cardFlippedDelay + cardFlippedDuration;
 
-    const cardsRefs = useMemo(() => cards.map((card) => createRef<HTMLDivElement>()), []);
-
-   /* useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-    }, []); */
+    const cardsRefs = useMemo(() => cards.map(() => createRef<HTMLDivElement>()), []);
+    const footerButtonClassName = isTypingCompleted
+        ? 'cards-footer-button visible'
+        : 'cards-footer-button';
 
     useEffect(() => {
         if (!isLoading) {
@@ -53,10 +56,12 @@ const Cards: FC = () => {
             const activeCardRef = cardsRefs[activeCardIndex];
             if (activeCardRef.current) {
                 const { offsetWidth, offsetHeight, offsetTop, offsetLeft } = activeCardRef.current;
+                const footerButtonOffset = 30;
+
                 setCardBackStyles({
                     width: offsetWidth,
                     height: offsetHeight,
-                    top: offsetTop,
+                    top: offsetTop - footerButtonOffset,
                     left: offsetLeft,
                 });
                 setIsCardBackReadyToFlip(true);
@@ -85,6 +90,12 @@ const Cards: FC = () => {
                 setIsCardReadyToFlip(true);
             }, cardFlippedTimeout);
         }
+    };
+
+    const handleContinue = async () => {
+        await getUserData({ setUser, setIsLoading: setIsUserLoading })
+        setMode(Modes.MainScreen);
+        setPredictionAlertOpened(true);
     };
 
     // TODO: переименовать переменные с анимацией более понятно, например isCardAnimationEnded
@@ -119,6 +130,11 @@ const Cards: FC = () => {
                         {isCardBackVisible && <Typewriter text={currentPrediction} delay={30} />}
                     </div>
                 )}
+            </div>
+            <div className={footerButtonClassName}>
+                <button className={'base-button'} onClick={handleContinue} disabled={isUserLoading}>
+                    Продолжить
+                </button>
             </div>
         </div>
     );

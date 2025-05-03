@@ -1,28 +1,27 @@
 import { FC, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { currentUser, isPaywallOpened, paywallRadioState } from '../app.atoms';
+import { currentUser, isPaywallOpened, isUserDataLoading, paywallRadioState } from '../app.atoms';
 import tgStarIcon from '../images/tg-star-icon.png';
-import { paywallItems, userRef } from '../app.const';
+import { paywallItems } from '../app.const';
 import { EventData, PaywallItem } from '../app.types';
-import {getInvoiceLink} from '../app.services';
-import { updateDoc } from 'firebase/firestore';
+import { getInvoiceLink, updateUser } from '../app.services';
 import { tg } from '../telegramData';
 
 const Paywall: FC = () => {
     const [paywallState, setPaywallState] = useRecoilState(paywallRadioState);
     const [isPaywallModalOpened, setIsPaywallModalOpened] = useRecoilState(isPaywallOpened);
-    const user = useRecoilValue(currentUser);
+    const [isUserLoading, setIsUserLoading] = useRecoilState(isUserDataLoading);
+    const [user, setUser] = useRecoilState(currentUser);
     // TODO: сделать анимацию для чекбокса и кастомную иконку внутри
 
     const handleInvoiceClosed = async (e: EventData) => {
         const { status } = e;
         if (status === 'paid' && user) {
-            const newBalance = user.balance + 1
-            if (userRef) {
-                await updateDoc(userRef, { balance: newBalance }).then(() => {
-                    setIsPaywallModalOpened(false);
-                });
-            }
+            const newBalance = user.balance + paywallState.value;
+            const updatedUser = { ...user, balance: newBalance };
+            await updateUser({ setUser, updatedUser, setIsLoading: setIsUserLoading }).then(() => {
+                setIsPaywallModalOpened(false);
+            });
         }
     };
 
@@ -55,10 +54,10 @@ const Paywall: FC = () => {
                 <div className={'paywall-header'}>
                     <div>Мы используем внутреннюю валюту Telegram - Stars.</div>
                     <div>
-                        Приобрести Stars можно через официального бота{' '}
+                        Приобрести Stars можно также через официального бота{' '}
                         <a href={'https://t.me/PremiumBot'}>Premium Bot</a>.
                     </div>
-                    <div>В боте доступна оплата российскими картами.</div>
+                    <div>Доступна оплата российскими картами.</div>
                 </div>
                 <div className={'paywall-body'}>
                     <ul>

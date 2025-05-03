@@ -1,9 +1,11 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import { TypewriterProps } from '../app.types';
 import { Cursor } from '../icons';
+import {useRecoilState} from "recoil";
+import {isTypewriterCompleted} from "../app.atoms";
 
 const Typewriter: FC<TypewriterProps> = ({ text, delay }) => {
-    const [isTypingCompleted, setIsTypingCompleted] = useState(false);
+    const [isTypingCompleted, setIsTypingCompleted] = useRecoilState(isTypewriterCompleted);
     const [displayResponse, setDisplayResponse] = useState('');
 
     useEffect(() => {

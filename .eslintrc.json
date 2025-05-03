@@ -54,7 +54,9 @@
         "no-void": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
         "import/no-unresolved": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-param-reassign": "off",
+        "dot-notation": "off"
     },
     "parser": "@typescript-eslint/parser"
 }

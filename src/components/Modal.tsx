@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { ModalProps } from '../app.types';
 import CrossIcon from '../icons/CrossIcon';
 
-const Modal: FC<ModalProps> = ({ children, onClose }) => {
+const Modal: FC<ModalProps> = ({ children, onClose, isCloseIconDisabled }) => {
     const [modalClassName, setModalClassName] = useState('modal');
 
     const handleClose = () => {
@@ -14,9 +14,11 @@ const Modal: FC<ModalProps> = ({ children, onClose }) => {
 
     return (
         <div className={modalClassName}>
-            <div className={'modal-close-icon'} onClick={handleClose}>
-                <CrossIcon />
-            </div>
+            {!isCloseIconDisabled && (
+                <div className={'modal-close-icon'} onClick={handleClose}>
+                    <CrossIcon />
+                </div>
+            )}
             <div className={'modal-content-wrapper'}>{children}</div>
         </div>
     );
