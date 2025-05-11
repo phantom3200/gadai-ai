@@ -69,6 +69,12 @@ export type UpdateUserProps = {
     updatedUser: User
 };
 
+export type GetInvoiceLinkProps = {
+    title: string;
+    price: number;
+    count: number;
+}
+
 export type PaywallItem = {
     id: number;
     title: string;

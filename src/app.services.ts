@@ -3,7 +3,7 @@ import imageCompression from 'browser-image-compression';
 import {
     AuthDataProps,
     AuthResponse,
-    CreateUserProps,
+    CreateUserProps, GetInvoiceLinkProps,
     GetPredictionBodyProps,
     GetUserDataProps,
     RequestDataByImageProps,
@@ -117,8 +117,8 @@ export const updateUser = async ({ setIsLoading, updatedUser, setUser }: UpdateU
         });
 };
 
-export const getInvoiceLink = async () => {
-    const response = await axios.post(urls.getInvoiceLink);
+export const getInvoiceLink = async (paymentInfo: GetInvoiceLinkProps) => {
+    const response = await axios.post(urls.getInvoiceLink, paymentInfo);
     const invoiceLink = response.data;
     return invoiceLink;
 };

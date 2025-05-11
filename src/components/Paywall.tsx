@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentUser, isPaywallOpened, isUserDataLoading, paywallRadioState } from '../app.atoms';
 import tgStarIcon from '../images/tg-star-icon.png';
 import { paywallItems } from '../app.const';
-import { EventData, PaywallItem } from '../app.types';
+import { EventData, GetInvoiceLinkProps, PaywallItem } from '../app.types';
 import { getInvoiceLink, updateUser } from '../app.services';
 import { tg } from '../telegramData';
 
@@ -37,7 +37,12 @@ const Paywall: FC = () => {
     };
 
     const openInvoiceLink = async () => {
-        const invoiceLinkResult = await getInvoiceLink();
+        const paymentInfo: GetInvoiceLinkProps = {
+            title: paywallState.title,
+            price: paywallState.price,
+            count: paywallState.value,
+        };
+        const invoiceLinkResult = await getInvoiceLink(paymentInfo);
         if (invoiceLinkResult.success) {
             const invoiceLink = invoiceLinkResult.data;
             tg.openInvoice(invoiceLink, () => null);
