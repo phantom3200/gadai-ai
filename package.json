@@ -6,7 +6,6 @@
     "name": "Viacheslav Lukhanin",
     "url": "https://www.linkedin.com/in/viacheslav-lukhanin-983687214/"
   },
-  "homepage": "https://phantom3200.github.io/gadai-ai/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
