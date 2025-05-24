@@ -50,7 +50,7 @@ const MainScreen: FC = () => {
     }, []);
 
     useEffect(() => {
-        if (isZeroBalance && !predictionAlertOpened) {
+        if (user && isZeroBalance && !predictionAlertOpened) {
             setIsPaywallModalOpened(true);
         }
     }, [user, predictionAlertOpened]);
