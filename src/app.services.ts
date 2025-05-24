@@ -51,7 +51,7 @@ export const auth = async () => {
 
      const data: AuthDataProps = {
         tgId: tgUserId,
-        initData: tg.initDataUnsafe,
+        initData: tg.initData,
     };
     await $api
         .post(urls.auth, data)

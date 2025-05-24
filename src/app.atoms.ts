@@ -61,7 +61,7 @@ export const isPaywallOpened = atom<boolean>({
 
 export const isPredictionAlertOpened = atom<boolean>({
     key: 'isPredictionAlertOpened',
-    default: true
+    default: false
 })
 
 export const isTypewriterCompleted = atom<boolean>({
