@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "https://phantom3200.github.io/gadai-ai/static/css/main.09a0d599.css",
-    "main.js": "https://phantom3200.github.io/gadai-ai/static/js/main.9fc3bc3a.js",
-    "static/js/453.7574fad3.chunk.js": "https://phantom3200.github.io/gadai-ai/static/js/453.7574fad3.chunk.js",
-    "static/media/demo_screen_3.jpg": "https://phantom3200.github.io/gadai-ai/static/media/demo_screen_3.1759bcab2630b31df14f.jpg",
-    "static/media/demo_screen_2.jpg": "https://phantom3200.github.io/gadai-ai/static/media/demo_screen_2.8d95b263ec1f72c2355c.jpg",
-    "static/media/demo_screen_1.jpg": "https://phantom3200.github.io/gadai-ai/static/media/demo_screen_1.5781699847f58101c688.jpg",
-    "static/media/card.png": "https://phantom3200.github.io/gadai-ai/static/media/card.e8ec377aed116f6f6938.png",
-    "static/media/tg-star-icon.png": "https://phantom3200.github.io/gadai-ai/static/media/tg-star-icon.691068e21319bcd08f73.png",
-    "index.html": "https://phantom3200.github.io/gadai-ai/index.html",
-    "static/media/bottom-left-corner.svg": "https://phantom3200.github.io/gadai-ai/static/media/bottom-left-corner.be190b0b64e75bad661d.svg",
-    "static/media/bottom-right-corner.svg": "https://phantom3200.github.io/gadai-ai/static/media/bottom-right-corner.93f642bb71e47c983521.svg",
-    "static/media/top-left-corner.svg": "https://phantom3200.github.io/gadai-ai/static/media/top-left-corner.dbfa638bc8806f1511b4.svg",
-    "static/media/top-right-corner.svg": "https://phantom3200.github.io/gadai-ai/static/media/top-right-corner.e28c4221f3094161176a.svg",
-    "main.09a0d599.css.map": "https://phantom3200.github.io/gadai-ai/static/css/main.09a0d599.css.map",
-    "main.9fc3bc3a.js.map": "https://phantom3200.github.io/gadai-ai/static/js/main.9fc3bc3a.js.map",
-    "453.7574fad3.chunk.js.map": "https://phantom3200.github.io/gadai-ai/static/js/453.7574fad3.chunk.js.map"
+    "main.css": "/static/css/main.c4e0d9c4.css",
+    "main.js": "/static/js/main.d4d1d25d.js",
+    "static/js/453.7574fad3.chunk.js": "/static/js/453.7574fad3.chunk.js",
+    "static/media/demo_screen_3.jpg": "/static/media/demo_screen_3.1759bcab2630b31df14f.jpg",
+    "static/media/demo_screen_2.jpg": "/static/media/demo_screen_2.8d95b263ec1f72c2355c.jpg",
+    "static/media/demo_screen_1.jpg": "/static/media/demo_screen_1.5781699847f58101c688.jpg",
+    "static/media/card.png": "/static/media/card.e8ec377aed116f6f6938.png",
+    "static/media/tg-star-icon.png": "/static/media/tg-star-icon.691068e21319bcd08f73.png",
+    "index.html": "/index.html",
+    "static/media/bottom-left-corner.svg": "/static/media/bottom-left-corner.be190b0b64e75bad661d.svg",
+    "static/media/bottom-right-corner.svg": "/static/media/bottom-right-corner.93f642bb71e47c983521.svg",
+    "static/media/top-left-corner.svg": "/static/media/top-left-corner.dbfa638bc8806f1511b4.svg",
+    "static/media/top-right-corner.svg": "/static/media/top-right-corner.e28c4221f3094161176a.svg",
+    "main.c4e0d9c4.css.map": "/static/css/main.c4e0d9c4.css.map",
+    "main.d4d1d25d.js.map": "/static/js/main.d4d1d25d.js.map",
+    "453.7574fad3.chunk.js.map": "/static/js/453.7574fad3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.09a0d599.css",
-    "static/js/main.9fc3bc3a.js"
+    "static/css/main.c4e0d9c4.css",
+    "static/js/main.d4d1d25d.js"
   ]
 }
