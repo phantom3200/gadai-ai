@@ -1,11 +1,18 @@
-import { blobToBase64, hapticHeartbreakFeedback } from './app.utils';
+import {
+    blobToBase64,
+    checkIsNextPredictionAvailable,
+    getRemainingTime,
+    hapticHeartbreakFeedback,
+} from './app.utils';
 import imageCompression from 'browser-image-compression';
 import {
     AuthDataProps,
     AuthResponse,
-    CreateUserProps, GetInvoiceLinkProps,
+    CreateUserProps,
+    GetInvoiceLinkProps,
     GetPredictionBodyProps,
     GetUserDataProps,
+    InitUserProps,
     RequestDataByImageProps,
     UpdateUserProps,
     User,
@@ -32,7 +39,7 @@ export const getPrediction = async ({
 
     const interval = setInterval(() => hapticHeartbreakFeedback(), 1000);
 
-     await $api
+    await $api
         .post(urls.getPrediction, body)
         .then((response) => {
             const { success, data } = response.data;
@@ -42,8 +49,8 @@ export const getPrediction = async ({
         })
         .catch((e) => console.log(e))
         .finally(() => {
-            clearInterval(interval)
-            setIsLoading(false)
+            clearInterval(interval);
+            setIsLoading(false);
         });
 };
 
@@ -59,7 +66,9 @@ export const auth = async () => {
             const token = response.data.data;
             saveToken(token);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+            console.log(e);
+        });
 };
 
 export const createUser = async ({ setIsLoading, setUser }: CreateUserProps) => {
@@ -82,14 +91,14 @@ export const createUser = async ({ setIsLoading, setUser }: CreateUserProps) => 
 
 export const getUserData = async ({ setUser, setIsLoading }: GetUserDataProps) => {
     setIsLoading(true);
-    await $api
+    const result = await $api
         .get(urls.getUserData)
         .then(async (response) => {
             const isSuccess = response.data.success;
             if (isSuccess) {
                 const user = response.data.data;
                 setUser(user);
-                return;
+                return response;
             }
             await createUser({ setIsLoading, setUser });
         })
@@ -97,6 +106,7 @@ export const getUserData = async ({ setUser, setIsLoading }: GetUserDataProps) =
         .finally(() => {
             setIsLoading(false);
         });
+    return result;
 };
 
 export const updateUser = async ({ setIsLoading, updatedUser, setUser }: UpdateUserProps) => {
@@ -121,4 +131,30 @@ export const getInvoiceLink = async (paymentInfo: GetInvoiceLinkProps) => {
     const response = await axios.post(urls.getInvoiceLink, paymentInfo);
     const invoiceLink = response.data;
     return invoiceLink;
+};
+
+export const initUser = async ({
+    setUser,
+    setIsLoading,
+    setPredictionAlertOpened,
+    setIsInitQueryLoading,
+}: InitUserProps) => {
+    setIsInitQueryLoading(true);
+    await auth()
+        .then(async () => {
+            const userDataResult = await getUserData({ setUser, setIsLoading });
+            return userDataResult;
+        })
+        .then((response) => {
+            if (response?.data.success) {
+                const timestamp = response.data.data.lastPredictionTimestamp;
+                const remainingTime = getRemainingTime(timestamp);
+                const isNextPredictionAvailable = checkIsNextPredictionAvailable(remainingTime);
+                if (!isNextPredictionAvailable) {
+                    setPredictionAlertOpened(true);
+                }
+            }
+        })
+        .catch((e) => console.log(e))
+        .finally(() => setIsInitQueryLoading(false));
 };

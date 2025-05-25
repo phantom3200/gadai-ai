@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { GetRemainingTimeData } from '../app.types';
-import { getRemainingTime } from '../app.utils';
+import { checkIsNextPredictionAvailable, getRemainingTime } from '../app.utils';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentUser, isPredictionAlertOpened } from '../app.atoms';
 
@@ -25,11 +25,8 @@ const PredictionAlertModal: FC = () => {
         if (!remainingTime) {
             return;
         }
-        if (
-            remainingTime?.hours <= 0 &&
-            remainingTime?.minutes <= 0 &&
-            remainingTime?.seconds <= 0
-        ) {
+        const isNextPredictionAvailable = checkIsNextPredictionAvailable(remainingTime);
+        if (isNextPredictionAvailable) {
             setPredictionAlertOpened(false);
         }
     }, [remainingTime]);

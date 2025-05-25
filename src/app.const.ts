@@ -55,21 +55,21 @@ export const paywallItems: PaywallItem[] = [
     {
         id: 1,
         title: '1 Предсказание',
-        price: 250,
+        price: 100,
         value: 1,
     },
     {
         id: 2,
         title: '10 Предсказаний',
-        price: 1500,
-        benefit: 40,
+        price: 500,
+        benefit: 25,
         value: 10,
     },
     {
         id: 3,
         title: '30 Предсказаний',
-        price: 2500,
-        benefit: 66,
+        price: 1000,
+        benefit: 67,
         value: 30
     },
 ];

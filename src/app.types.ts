@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from 'react';
 
 export type IconsProps = {
     className?: string;
@@ -66,14 +66,14 @@ export type CreateUserProps = {
 export type UpdateUserProps = {
     setIsLoading: (value: boolean) => void;
     setUser: (user: User | null) => void;
-    updatedUser: User
+    updatedUser: User;
 };
 
 export type GetInvoiceLinkProps = {
     title: string;
     price: number;
     count: number;
-}
+};
 
 export type PaywallItem = {
     id: number;
@@ -81,34 +81,39 @@ export type PaywallItem = {
     price: number;
     value: number;
     benefit?: number;
-}
+};
 
 export type ModalProps = {
     children: ReactNode;
     onClose: () => void;
     isCloseIconDisabled?: boolean;
-}
+};
 
-export type EventData = { url: string; status: "paid" | "cancelled" | "failed" | "pending" }
+export type EventData = { url: string; status: 'paid' | 'cancelled' | 'failed' | 'pending' };
 
 export type InvoiceClosedCallback = (eventData: EventData) => void;
 
 export type AuthDataProps = {
-    tgId: string | null,
-    initData: unknown
-}
+    tgId: string | null;
+    initData: unknown;
+};
+
+export type InitUserProps = GetUserDataProps & {
+    setPredictionAlertOpened: (value: boolean) => void;
+    setIsInitQueryLoading: (value: boolean) => void;
+};
 
 export type AuthResponse = {
     success: boolean;
-    data: string | null
-}
+    data: string | null;
+};
 
 export type GetPredictionBodyProps = {
     base64Image: string | null;
-}
+};
 
 export type GetRemainingTimeData = {
     hours: number;
     minutes: number;
     seconds: number;
-}
+};
