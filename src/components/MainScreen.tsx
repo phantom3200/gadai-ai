@@ -11,10 +11,11 @@ import {
     isPaywallOpened,
     currentUser,
     isPredictionAlertOpened,
+    isInitUserLoading,
 } from '../app.atoms';
 import { Modes } from '../app.const';
 import LogoIcon from '../icons/LogoIcon';
-import { auth, getUserData, getPrediction } from '../app.services';
+import { auth, getUserData, getPrediction, initUser } from '../app.services';
 import Paywall from './Paywall';
 import Modal from './Modal';
 import { tg } from '../telegramData';
@@ -26,6 +27,7 @@ const MainScreen: FC = () => {
     const [isPredictionLoading, setIsPredictionDataLoading] =
         useRecoilState(isPredictionDataLoading);
     const [isUserLoading, setIsUserLoading] = useRecoilState(isUserDataLoading);
+    const [isInitQueryLoading, setIsInitQueryLoading] = useRecoilState(isInitUserLoading);
     const [currentPrediction, setCurrentPrediction] = useRecoilState(prediction);
     const [mode, setMode] = useRecoilState(currentMode);
     const [file, setFile] = useRecoilState(image);
@@ -43,14 +45,20 @@ const MainScreen: FC = () => {
         : true;
 
     useEffect(() => {
-        // TODO: проверить как будет работать связь с бэком без токена и с невалидным
         if (!user) {
-            auth().then(() => getUserData({ setUser, setIsLoading: setIsUserLoading }));
+            void initUser({
+                setUser,
+                setPredictionAlertOpened,
+                setIsInitQueryLoading,
+                setIsLoading: setIsUserLoading,
+            });
         }
     }, []);
 
     useEffect(() => {
-        if (user && isZeroBalance && !predictionAlertOpened) {
+        const isOpenPaywall =
+            user && isZeroBalance && !predictionAlertOpened && !isInitQueryLoading;
+        if (isOpenPaywall) {
             setIsPaywallModalOpened(true);
         }
     }, [user, predictionAlertOpened]);

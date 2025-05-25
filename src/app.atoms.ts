@@ -44,6 +44,11 @@ export const isUserDataLoading = atom<boolean>({
     default: false,
 });
 
+export const isInitUserLoading = atom<boolean>({
+    key: 'isInitUserLoading',
+    default: false,
+})
+
 export const currentUser = atom<User | null>({
     key: 'currentUser',
     default: null,

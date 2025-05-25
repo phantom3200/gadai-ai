@@ -89,3 +89,9 @@ export const getRemainingTime = (timestamp: number): GetRemainingTimeData => {
 
     return { hours, minutes, seconds };
 };
+
+export const checkIsNextPredictionAvailable = (remainingTime: GetRemainingTimeData) => {
+    const isNextPredictionAvailable =
+        remainingTime?.hours <= 0 && remainingTime?.minutes <= 0 && remainingTime?.seconds <= 0;
+    return isNextPredictionAvailable;
+};
