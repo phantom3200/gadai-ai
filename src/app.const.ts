@@ -47,7 +47,7 @@ export const defaultUser: User = {
     name: tgUserName,
     surname: tgUserSurname,
     username: tgUserNickname,
-    balance: 2,
+    balance: 10,
     lastPredictionTimestamp: null
 };
 

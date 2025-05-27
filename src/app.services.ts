@@ -128,7 +128,7 @@ export const updateUser = async ({ setIsLoading, updatedUser, setUser }: UpdateU
 };
 
 export const getInvoiceLink = async (paymentInfo: GetInvoiceLinkProps) => {
-    const response = await axios.post(urls.getInvoiceLink, paymentInfo);
+    const response = await $api.post(urls.getInvoiceLink, paymentInfo);
     const invoiceLink = response.data;
     return invoiceLink;
 };
