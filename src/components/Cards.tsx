@@ -3,27 +3,31 @@ import clsx from 'clsx';
 import card from '../images/card.png';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-    currentMode, currentUser,
+    currentMode,
+    currentUser,
+    image,
     isPredictionAlertOpened,
     isPredictionDataLoading,
-    isTypewriterCompleted, isUserDataLoading,
+    isTypewriterCompleted,
+    isUserDataLoading,
     prediction,
 } from '../app.atoms';
 import { cards, Modes } from '../app.const';
 // @ts-ignore
 import styles from '../App.scss';
 import Typewriter from './Typewriter';
-import {getUserData} from "../app.services";
+import { getUserData } from '../app.services';
 
 const Cards: FC = () => {
     const [isLoading, setIsLoading] = useRecoilState(isPredictionDataLoading);
     const [mode, setMode] = useRecoilState(currentMode);
+    const [file, setFile] = useRecoilState(image);
     const [predictionAlertOpened, setPredictionAlertOpened] =
         useRecoilState(isPredictionAlertOpened);
     const [user, setUser] = useRecoilState(currentUser);
     const [isUserLoading, setIsUserLoading] = useRecoilState(isUserDataLoading);
-    const currentPrediction = useRecoilValue(prediction);
-    const isTypingCompleted = useRecoilValue(isTypewriterCompleted);
+    const [currentPrediction, setCurrentPrediction] = useRecoilState(prediction);
+    const [isTypingCompleted, setIsTypingCompleted] = useRecoilState(isTypewriterCompleted);
     const [activeCardId, setActiveCardId] = useState<number | null>(null);
     const [isCardReadyToFlip, setIsCardReadyToFlip] = useState(false);
     const [isCardsAnimationFinished, setIsCardsAnimationFinished] = useState(false);
@@ -92,9 +96,18 @@ const Cards: FC = () => {
         }
     };
 
+    const clearStateAfterPrediction = () => {
+        setFile(null);
+        setCurrentPrediction('');
+        setIsTypingCompleted(false);
+        setIsLoading(true);
+    };
+
     const handleContinue = async () => {
-        await getUserData({ setUser, setIsLoading: setIsUserLoading })
+        await getUserData({ setUser, setIsLoading: setIsUserLoading });
         setMode(Modes.MainScreen);
+        clearStateAfterPrediction();
+        // TODO: перенести в главный экран, чтобы открывалось с анимацией
         setPredictionAlertOpened(true);
     };
 
