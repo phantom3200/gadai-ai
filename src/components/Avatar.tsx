@@ -7,8 +7,6 @@ import { Modes } from '../app.const';
 const Avatar: FC = () => {
     const [file, setFile] = useRecoilState(image);
     const [mode, setMode] = useRecoilState(currentMode);
-    const url = useRecoilValue(imageUrl);
-    const croppedImg = useRecoilValue(croppedImage);
     const croppedImgUrl = useRecoilValue(croppedImageUrl);
     const [innerStyles, setInnerStyles] = useState<CSSProperties>();
     const innerRef = useRef<HTMLDivElement | null>(null);
